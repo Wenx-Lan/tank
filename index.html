@@ -171,7 +171,7 @@
       "..WW..WW..WW.",
       ".............",
       "SS..SS..SS..S",
-      "#...#.#.#...#",
+      "#.....#.#...#",
       ".....BBB.....",
     ],
     [
@@ -266,9 +266,12 @@
   }
 
   function spawnPlayer() {
+    const sc = 4, sr = 11;                 // 出生格（列、行）
+    // 确保出生格没有砖块等实心图块，避免坦克与砖块重叠
+    if (isSolid(grid[sr][sc])) grid[sr][sc] = EMPTY;
     player = {
-      x: 4 * TILE + (TILE - TANK) / 2,
-      y: 11 * TILE + (TILE - TANK) / 2,
+      x: sc * TILE + (TILE - TANK) / 2,
+      y: sr * TILE + (TILE - TANK) / 2,
       dir: UP,
       speed: 210,
       cooldown: 0,
